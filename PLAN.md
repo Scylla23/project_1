@@ -230,7 +230,7 @@ All state human-readable. Nothing leaves the machine.
       Test: execute verbatim from fresh state; every beat lands; ≤30s of typing.
       Demo value: HIGH
 
-- [ ] T5.3 — docs/how-it-works.md
+- [x] T5.3 — docs/how-it-works.md
       What: technical deep-dive draft: PreToolUse updatedInput trick (with the full-replacement
       gotcha), skill model: frontmatter turn-override, model resolution order, why OAuth proxying
       is off the table, known limits (CLAUDE_CODE_SUBAGENT_MODEL trumps the hook).
