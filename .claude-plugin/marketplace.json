@@ -1,0 +1,7 @@
+{
+  "name": "router-dev",
+  "owner": { "name": "local" },
+  "plugins": [
+    { "name": "router", "source": "./" }
+  ]
+}

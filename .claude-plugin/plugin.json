@@ -1,0 +1,5 @@
+{
+  "name": "router",
+  "description": "Auto-routes every task to the cheapest Claude model that can handle it. Learns your taste. Never silent.",
+  "version": "0.1.0"
+}

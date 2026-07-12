@@ -1,0 +1,4 @@
+{
+  "_comment": "T1.4 UserPromptSubmit->inject.js | T1.6 PostToolUse(Agent)->log.js | T2.2 SessionStart->init.js | T3.2 PreToolUse(Agent)->enforce.js",
+  "hooks": {}
+}
