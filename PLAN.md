@@ -28,7 +28,7 @@ All state human-readable. Nothing leaves the machine.
       Test: `claude plugin validate .` passes; plugin installs from local marketplace and shows in /plugin.
       Demo value: none
 
-- [ ] T1.2 — Four pinned worker agents
+- [x] T1.2 — Four pinned worker agents
       What: `haiku-worker`, `sonnet-worker`, `opus-worker`, `fable-architect` — tuned frontmatter
       (model, effort, focused description) + tier-scoped system prompts (haiku: mechanical edits only,
       escalate if unsure; sonnet: standard implementation; opus: complex multi-file; fable: architecture/planning, no code).
