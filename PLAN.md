@@ -83,7 +83,7 @@ All state human-readable. Nothing leaves the machine.
 
 ## Phase 2: Visibility & Trust (must ship)
 
-- [ ] T2.1 — Visible routing one-liners
+- [x] T2.1 — Visible routing one-liners
       What: lock the one-line format `→ haiku-worker · single-file style tweak · /router:redo to escalate`
       into the injected directive (model prints it before every delegation — never silent). Design pass
       for screenshot: alignment, exactly one glyph, no wrapping at 80 cols.

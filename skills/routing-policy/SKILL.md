@@ -26,7 +26,8 @@ Use this rubric to choose the cheapest worker capable of completing the task.
 1. The cheapest capable tier wins.
 2. When in doubt between two tiers, pick the lower and note that escalation
    is one `/router:redo` away.
-3. Always announce with the one-liner below before delegating.
+3. Always print the one-liner below as a plain-text line (not a code
+   block) immediately before delegating. Never delegate silently.
 
 ## When NOT to delegate
 
@@ -36,6 +37,11 @@ seconds.
 
 ## One-liner contract
 
-```
-→ <agent> · <task summary ≤40 chars> · /router:redo to escalate
-```
+→ <agent> · <task summary ≤32 chars> · /router:redo to escalate
+
+`<agent>` is the basename without the `router:` prefix.
+
+Exactly one glyph (`→`); the whole line must fit in 80 columns.
+
+Print it for every delegation, including auto-escalations via the
+architect/design skills.

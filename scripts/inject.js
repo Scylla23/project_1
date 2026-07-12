@@ -49,9 +49,11 @@ async function main() {
     "Do not delegate interactive, ambiguous, or conversational work.",
     "Architecture, system design, and migration planning are ALWAYS delegated",
     "to fable-architect - never answer them at the main tier, however small.",
-    "Before EVERY delegation print exactly one line, then delegate:",
-    "  → <agent> · <task summary ≤40 chars> · /router:redo to escalate",
-    "Never delegate silently. Consult the routing-policy skill when unsure.",
+    "Before EVERY delegation, print exactly this plain-text line, then delegate:",
+    "  → <agent> · <task summary ≤32 chars> · /router:redo to escalate",
+    "<agent> is the basename (haiku-worker), never the namespaced form. The whole",
+    "line must fit 80 columns. Never delegate silently, never skip the line.",
+    "Consult the routing-policy skill when unsure.",
     "Learned rules (top 3):",
     ...(rules.length
       ? rules.map((rule) => `  ${rule}`.slice(0, 78))
