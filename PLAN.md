@@ -37,7 +37,7 @@ All state human-readable. Nothing leaves the machine.
       (ctrl+o) the subagent ran on haiku.
       Demo value: low
 
-- [ ] T1.3 — Routing-policy skill with rubric table
+- [x] T1.3 — Routing-policy skill with rubric table
       What: `skills/routing-policy/SKILL.md` — the full classification rubric as a readable markdown
       table (complexity × task type → tier), delegation rules, when NOT to delegate (interactive/ambiguous work).
       Auto-invocable so the main session pulls it when routing is in question.
