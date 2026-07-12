@@ -204,7 +204,7 @@ All state human-readable. Nothing leaves the machine.
       Test: reads great in a fresh-install screenshot at default terminal width.
       Demo value: HIGH
 
-- [ ] T4.7 — /router:memory + README badge
+- [x] T4.7 — /router:memory + README badge
       What: `skills/memory/SKILL.md` pretty-prints memory.md as the "taste profile" card (same visual
       system as stats). Plus the shields.io "🧭 routed by ModelRouter" badge snippet in README and
       stats-card.md.
