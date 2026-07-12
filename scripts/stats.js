@@ -40,6 +40,14 @@ function readJson(file, fallback) {
   }
 }
 
+function readPricing(file) {
+  const pricing = readJson(file, null);
+  return pricing && !Array.isArray(pricing) &&
+      Object.keys(pricing).every((key) => key.startsWith("_") || TIERS.includes(key)) &&
+      TIERS.every((tier) => Number.isFinite(pricing[tier]) && pricing[tier] >= 0)
+    ? pricing : null;
+}
+
 function readLog(file) {
   try {
     return fs.readFileSync(file, "utf8").split("\n").filter(Boolean).flatMap(
@@ -83,6 +91,10 @@ function shareRules(file) {
 
 function main() {
   const share = process.argv.includes("--share");
+  const showCost = process.argv.includes("--cost");
+  const pricing = showCost ? readPricing(path.join(
+    __dirname, "..", "data", "pricing.json",
+  )) : null;
 
   const state = path.join(process.cwd(), ".router");
   const userState = path.join(os.homedir(), ".router");
@@ -112,6 +124,9 @@ function main() {
       rule(),
     ].join("\n"));
     if (share) console.log("not enough data for a share card yet");
+    if (showCost && !pricing) {
+      console.log("[router] data/pricing.json missing or invalid - cost lines skipped");
+    }
     return;
   }
 
@@ -131,6 +146,11 @@ function main() {
   const down = Math.round(100 * (counts.haiku + counts.sonnet) / total);
   const redoRate = Math.round(100 * redos / total);
   const learned = learnedRules(path.join(userState, "memory.md"));
+  const dollarsSaved = pricing && total * pricing.opus - current.reduce(
+    (sum, entry) => sum + (TIERS.includes(modelOf(entry))
+      ? pricing[modelOf(entry)] : pricing.opus),
+    0,
+  );
 
   console.log([
     config.audit
@@ -146,6 +166,9 @@ function main() {
     config.audit
       ? "  would-route mix over the last 7 days"
       : `  down-routed ${down}% · redo rate ${redoRate}%`,
+    ...(pricing ? [config.audit
+      ? `  est. saved $${dollarsSaved.toFixed(2)} vs all-Opus (audited)`
+      : `  est. saved $${dollarsSaved.toFixed(2)} vs all-Opus this week`] : []),
     rule("what I've learned about you"),
     ...(learned.length ? learned : ["  (nothing yet - /router:redo trains me)"]),
     rule(),
@@ -174,6 +197,10 @@ function main() {
     fs.mkdirSync(state, { recursive: true });
     fs.writeFileSync(path.join(state, "stats-card.md"), card);
     console.log("stats card written to .router/stats-card.md");
+  }
+
+  if (showCost && !pricing) {
+    console.log("[router] data/pricing.json missing or invalid - cost lines skipped");
   }
 }
 

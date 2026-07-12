@@ -51,6 +51,18 @@ function readLog(file) {
   }
 }
 
+function readPricing(file) {
+  try {
+    const pricing = JSON.parse(fs.readFileSync(file, "utf8"));
+    return pricing && !Array.isArray(pricing) &&
+        Object.keys(pricing).every((key) => key.startsWith("_") || TIERS.includes(key)) &&
+        TIERS.every((tier) => Number.isFinite(pricing[tier]) && pricing[tier] >= 0)
+      ? pricing : null;
+  } catch {
+    return null;
+  }
+}
+
 function savings(entries) {
   if (!entries.length) return 0;
   const cost = entries.reduce((sum, entry) => {
@@ -64,7 +76,17 @@ function dateLabel(date) {
   return `${MONTHS[date.getUTCMonth()]} ${date.getUTCDate()}`;
 }
 
+function dollarsSaved(entries, pricing) {
+  const spent = entries.reduce((sum, entry) => sum +
+    (TIERS.includes(entry.model) ? pricing[entry.model] : pricing.opus), 0);
+  return entries.length * pricing.opus - spent;
+}
+
 function main() {
+  const showCost = process.argv.includes("--cost");
+  const pricing = showCost ? readPricing(path.join(
+    __dirname, "..", "data", "pricing.json",
+  )) : null;
   const env = process.env.ROUTER_NOW;
   let now = env ? new Date(env) : new Date();
   if (isNaN(now.getTime())) now = new Date();
@@ -78,6 +100,9 @@ function main() {
       "  Zero-risk trial: /router:audit on just watches.",
       rule(),
     ].join("\n"));
+    if (showCost && !pricing) {
+      console.log("[router] data/pricing.json missing or invalid - cost lines skipped");
+    }
     return;
   }
 
@@ -138,11 +163,19 @@ function main() {
     rule("trend vs last week"),
     trend,
     tasks,
+    ...(pricing ? [`  est. saved $${dollarsSaved(current, pricing).toFixed(2)} ` +
+      `this week (${prior.length
+        ? `last week $${dollarsSaved(prior, pricing).toFixed(2)}`
+        : "no history yet"})`] : []),
     rule("personal best"),
     `  Longest streak without touching Fable: ${longest} ` +
       `${longest === 1 ? "day" : "days"}`,
     rule(),
   ].join("\n"));
+
+  if (showCost && !pricing) {
+    console.log("[router] data/pricing.json missing or invalid - cost lines skipped");
+  }
 }
 
 try {

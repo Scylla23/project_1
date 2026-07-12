@@ -1,0 +1,7 @@
+{
+  "_note": "Rough USD per delegated task. Edit freely - scripts read this file on every run; no code change needed.",
+  "haiku": 0.01,
+  "sonnet": 0.03,
+  "opus": 0.15,
+  "fable": 0.25
+}

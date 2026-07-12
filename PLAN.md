@@ -297,7 +297,7 @@ All state human-readable. Nothing leaves the machine.
       Test: dry-run prints plan, log untouched.
       Demo value: none
 
-- [ ] T6.4 — Cost-estimate lines
+- [x] T6.4 — Cost-estimate lines
       What: optional $ estimates on stats/week using `data/pricing.json` (single editable file so
       prices never rot in code); off by default, `/router:stats --cost`.
       Files: data/pricing.json, scripts/stats.js
