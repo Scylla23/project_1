@@ -253,7 +253,7 @@ All state human-readable. Nothing leaves the machine.
       Test: fresh user → install → first-run greeting → first routed prompt, no manual steps.
       Demo value: HIGH — install friction kills virality.
 
-- [ ] T5.6 — Screenshot pass on every printed surface
+- [x] T5.6 — Screenshot pass on every printed surface
       What: run every user-visible output (greeting, one-liners, escalation lines, stats, week,
       memory card, mode confirmations) at 80-col dark terminal; fix alignment, wrapping, emoji width.
       Files: scripts/*.js copy tweaks
