@@ -165,7 +165,7 @@ All state human-readable. Nothing leaves the machine.
       "not enough data yet" card.
       Demo value: HIGH — the single most shared artifact; final frame of the demo.
 
-- [ ] T4.2 — /router:stats --share
+- [x] T4.2 — /router:stats --share
       What: `--share` also writes `.router/stats-card.md` — clean markdown card for X/LinkedIn,
       with the badge snippet (T4.7) appended.
       Files: scripts/stats.js

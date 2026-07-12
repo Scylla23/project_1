@@ -10,6 +10,7 @@ const COST_WEIGHT = { haiku: 1, sonnet: 3, opus: 15, fable: 25 };
 const OPUS_WEIGHT = COST_WEIGHT.opus;
 const TIERS = Object.keys(COST_WEIGHT);
 const WEEK = 7 * 24 * 60 * 60 * 1000;
+const BADGE = "[![🧭 routed by ModelRouter](https://img.shields.io/badge/🧭_routed_by-ModelRouter-blue)](https://github.com/pavankushnure/modelrouter)";
 
 function width(line) {
   return [...line].reduce(
@@ -69,9 +70,19 @@ function learnedRules(file) {
   }
 }
 
+function shareRules(file) {
+  try {
+    return fs.readFileSync(file, "utf8").split("\n").flatMap((line) => {
+      const match = line.match(/^- \d{4}-\d{2}-\d{2}: (.+?) → (haiku|sonnet|opus|fable) \(.+\)$/);
+      return match ? [`- ${match[1]} → ${match[2]}`] : [];
+    }).slice(-3);
+  } catch {
+    return [];
+  }
+}
+
 function main() {
   const share = process.argv.includes("--share");
-  void share;
 
   const state = path.join(process.cwd(), ".router");
   const userState = path.join(os.homedir(), ".router");
@@ -100,6 +111,7 @@ function main() {
       "  Zero-risk trial: /router:audit on just watches.",
       rule(),
     ].join("\n"));
+    if (share) console.log("not enough data for a share card yet");
     return;
   }
 
@@ -132,6 +144,31 @@ function main() {
     ...(learned.length ? learned : ["  (nothing yet - /router:redo trains me)"]),
     rule(),
   ].join("\n"));
+
+  if (share) {
+    const summary = config.audit
+      ? `**~${saved}% of Opus quota would have been saved** · ${total} prompts audited`
+      : `**~${saved}% of Opus quota saved** · ${total} tasks routed · ${redos} ${redos === 1 ? "redo" : "redos"}`;
+    const card = [
+      "## 🧭 ModelRouter — my week",
+      "",
+      summary,
+      "",
+      "| tier   | tasks | share |",
+      "|--------|------:|------:|",
+      ...TIERS.map((tier) => `| ${tier.padEnd(7)}| ${String(counts[tier]).padStart(5)} | ${(Math.round(counts[tier] / total * 100) + "%").padStart(5)} |`),
+      "",
+      "What it learned about me:",
+      "",
+      ...shareRules(path.join(userState, "memory.md")),
+      "",
+      BADGE,
+      "",
+    ].join("\n");
+    fs.mkdirSync(state, { recursive: true });
+    fs.writeFileSync(path.join(state, "stats-card.md"), card);
+    console.log("stats card written to .router/stats-card.md");
+  }
 }
 
 try {
