@@ -269,6 +269,15 @@ All state human-readable. Nothing leaves the machine.
 
 ## Phase 6: Stretch (only if time remains)
 
+- [x] T6.0 — Repo-home sweep (added 2026-07-13)
+      What: GitHub home moved to https://github.com/Scylla23/modelrouter; sweep every
+      stale pavankushnure/modelrouter URL (README badge + install line, CONTRIBUTING
+      clone URL, stats.js BADGE, golden-stats-card.md, showcase-p4.sh badge assert);
+      correct-and-commit the stray AGENTS.md. Contracts: .route/phase-6.md D1.
+      Files: README.md, CONTRIBUTING.md, scripts/stats.js, AGENTS.md (+ gitignored harness)
+      Test: git grep pavankushnure → zero hits; RUN_LIVE=1 .route/showcase-p4.sh green.
+      Demo value: none
+
 - [ ] T6.1 — /router:stats --png
       What: render the stats card to PNG via a tiny self-contained HTML template + headless Chrome
       if present (skip gracefully if not).

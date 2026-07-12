@@ -1,6 +1,6 @@
 # ModelRouter
 
-[![🧭 routed by ModelRouter](https://img.shields.io/badge/🧭_routed_by-ModelRouter-blue)](https://github.com/pavankushnure/modelrouter)
+[![🧭 routed by ModelRouter](https://img.shields.io/badge/🧭_routed_by-ModelRouter-blue)](https://github.com/Scylla23/modelrouter)
 
 **Make your Max plan last the whole week.**
 
@@ -37,7 +37,7 @@ the cost weights at the top of `scripts/stats.js`.*
 ## Install
 
 ```
-claude plugin marketplace add pavankushnure/modelrouter && claude plugin install router@modelrouter
+claude plugin marketplace add Scylla23/modelrouter && claude plugin install router@modelrouter
 ```
 
 That's it. No API keys, no dependencies, no configuration. Open Claude

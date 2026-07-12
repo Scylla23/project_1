@@ -10,7 +10,7 @@ const COST_WEIGHT = { haiku: 1, sonnet: 3, opus: 15, fable: 25 };
 const OPUS_WEIGHT = COST_WEIGHT.opus;
 const TIERS = Object.keys(COST_WEIGHT);
 const WEEK = 7 * 24 * 60 * 60 * 1000;
-const BADGE = "[![🧭 routed by ModelRouter](https://img.shields.io/badge/🧭_routed_by-ModelRouter-blue)](https://github.com/pavankushnure/modelrouter)";
+const BADGE = "[![🧭 routed by ModelRouter](https://img.shields.io/badge/🧭_routed_by-ModelRouter-blue)](https://github.com/Scylla23/modelrouter)";
 
 function width(line) {
   return [...line].reduce(

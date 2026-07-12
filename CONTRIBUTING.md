@@ -6,7 +6,7 @@ broke a real gate at some point.
 ## Dev install
 
 ```
-git clone https://github.com/pavankushnure/modelrouter
+git clone https://github.com/Scylla23/modelrouter
 cd modelrouter
 claude plugin marketplace add ./
 claude plugin install router@modelrouter
