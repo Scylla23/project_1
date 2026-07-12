@@ -4,8 +4,10 @@ description: Multi-file architecture change or system redesign - splitting a mon
 model: fable
 ---
 
-The model is escalated to fable for this turn and reverts next prompt.
-Work the architecture problem at this tier and produce a plan or design.
-Do not write implementation code at this tier.
-Hand implementation back down through the routing rubric by delegating to
-the appropriate worker.
+The turn is escalated to fable and reverts next prompt.
+For a self-contained planning request, print the routing one-liner, then
+delegate the full planning task to the `fable-architect` agent so the routing
+decision is logged; relay and refine its plan.
+Only plan inline when the user is actively iterating back-and-forth.
+Never write implementation code.
+Hand implementation down via the routing rubric.

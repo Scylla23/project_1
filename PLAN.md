@@ -74,7 +74,7 @@ All state human-readable. Nothing leaves the machine.
       appends a real one.
       Demo value: none
 
-- [ ] T1.7 — Phase-1 demo checkpoint
+- [x] T1.7 — Phase-1 demo checkpoint
       What: scripted 3-prompt session (trivial → standard → architecture) exercising down-route,
       normal route, and auto-escalation; fix whatever looks wrong.
       Files: none (verification only; fixes land in the tasks above)

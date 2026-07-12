@@ -28,10 +28,12 @@ async function main() {
   } catch {}
 
   const agent = toolInput.subagent_type || "unknown";
+  const agentName = agent.slice(agent.lastIndexOf(":") + 1);
   const event = {
     ts: new Date().toISOString(),
     model:
-      toolInput.model || (Object.hasOwn(models, agent) ? models[agent] : "inherit"),
+      toolInput.model ||
+      (Object.hasOwn(models, agentName) ? models[agentName] : "inherit"),
     agent,
     task: toolInput.description || String(toolInput.prompt || "").slice(0, 60),
     fingerprint,

@@ -47,6 +47,8 @@ async function main() {
     "  complex multi-file -> opus-worker     " +
       "architecture/planning -> fable-architect",
     "Do not delegate interactive, ambiguous, or conversational work.",
+    "Architecture, system design, and migration planning are ALWAYS delegated",
+    "to fable-architect - never answer them at the main tier, however small.",
     "Before EVERY delegation print exactly one line, then delegate:",
     "  → <agent> · <task summary ≤40 chars> · /router:redo to escalate",
     "Never delegate silently. Consult the routing-policy skill when unsure.",
