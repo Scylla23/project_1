@@ -214,7 +214,7 @@ All state human-readable. Nothing leaves the machine.
 
 ## Phase 5: Polish, Docs & Launch Assets
 
-- [ ] T5.1 — README as landing page
+- [x] T5.1 — README as landing page
       What: hero one-liner ("Make your Max plan last the whole week"), stats screenshot at top,
       30-sec GIF placeholder, one-line install, "How it works" (the two native doors, no proxy,
       no ToS risk), privacy note (all state local + human-readable), FAQ ("Will this make my code
