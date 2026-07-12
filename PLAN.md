@@ -172,7 +172,7 @@ All state human-readable. Nothing leaves the machine.
       Test: card renders correctly pasted into a GitHub comment preview.
       Demo value: HIGH
 
-- [ ] T4.3 — Audit mode
+- [x] T4.3 — Audit mode
       What: `/router:audit on|off` flips config.json. When on: inject.js switches the directive to
       "route NOTHING, work normally" and logs a heuristic would-have-routed classification per prompt
       (deterministic keyword/length classifier in inject.js — no model dependence); stats.js renders

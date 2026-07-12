@@ -10,6 +10,12 @@ const keywords = [
   "performance", "architecture", "design", "plan", "migrate", "split",
   "redesign",
 ];
+const AUDIT_BUCKETS = {
+  fable: ["architecture", "design", "plan", "migrate", "split", "redesign"],
+  opus: ["refactor", "debug", "performance"],
+  sonnet: ["feature", "add", "implement", "bug", "test"],
+  haiku: ["fix", "typo", "rename", "comment", "format", "docs"],
+};
 
 function optional(file, fallback, parse = (value) => value) {
   try {
@@ -38,7 +44,7 @@ async function main() {
     .split(/\r?\n/)
     .filter((line) => /^- \d{4}-\d{2}-\d{2}:/.test(line))
     .slice(-3);
-  const directive = [
+  const routingDirective = [
     `[router] mode: ${config.mode || "balanced"} · audit: ` +
       (config.audit ? "on" : "off"),
     "Route every delegable task to the cheapest capable tier:",
@@ -59,23 +65,45 @@ async function main() {
       ? rules.map((rule) => `  ${rule}`.slice(0, 78))
       : ["  (none yet)"]),
   ].join("\n");
+  const auditDirective = [
+    `[router] mode: ${config.mode || "balanced"} · audit: ON · routing paused`,
+    "AUDIT MODE: do NOT delegate anything. Do not use the Agent tool at all.",
+    "Handle every task yourself in this session, at the main tier.",
+    "The router is watching: each prompt is logged with the tier it WOULD have",
+    "routed to. /router:stats shows what routing would have saved.",
+    "/router:audit off resumes real routing.",
+  ].join("\n");
+  const directive = config.audit ? auditDirective : routingDirective;
 
   const words = prompt.toLowerCase().match(/\b\w+\b/g) || [];
   const fileMatches = prompt.match(/\b[\w./-]+\.\w{1,10}\b/g) || [];
   const state = path.join(input.cwd || process.cwd(), ".router");
+  const fingerprint = {
+    ts: new Date().toISOString(),
+    chars: prompt.length,
+    words: prompt.trim() ? prompt.trim().split(/\s+/).length : 0,
+    keywords: keywords.filter((word) => words.includes(word)),
+    files: [...new Set(fileMatches)].slice(0, 10),
+    excerpt: prompt.slice(0, 80),
+  };
   try {
     fs.mkdirSync(state, { recursive: true });
     fs.writeFileSync(
       path.join(state, "last-prompt.json"),
-      JSON.stringify({
-        ts: new Date().toISOString(),
-        chars: prompt.length,
-        words: prompt.trim() ? prompt.trim().split(/\s+/).length : 0,
-        keywords: keywords.filter((word) => words.includes(word)),
-        files: [...new Set(fileMatches)].slice(0, 10),
-        excerpt: prompt.slice(0, 80),
-      }, null, 2) + "\n",
+      JSON.stringify(fingerprint, null, 2) + "\n",
     );
+    if (config.audit && !prompt.trim().startsWith("/")) {
+      const wouldRoute = Object.entries(AUDIT_BUCKETS).find(([, bucket]) =>
+        bucket.some((word) => words.includes(word)))?.[0] ||
+        (fingerprint.words >= 30 ? "sonnet" : "haiku");
+      fs.appendFileSync(path.join(state, "log.jsonl"), JSON.stringify({
+        ts: fingerprint.ts,
+        audit: true,
+        would_route: wouldRoute,
+        task: prompt.slice(0, 60),
+        fingerprint,
+      }) + "\n");
+    }
   } catch {}
   process.stdout.write(JSON.stringify({
     hookSpecificOutput: {

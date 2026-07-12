@@ -133,13 +133,19 @@ function main() {
   const learned = learnedRules(path.join(userState, "memory.md"));
 
   console.log([
-    `🎯 ~${saved}% of Opus quota saved this week`,
+    config.audit
+      ? `🔍 audit: ~${saved}% of Opus quota would have been saved`
+      : `🎯 ~${saved}% of Opus quota saved this week`,
     "",
-    rule("router · stats"),
-    `  this week: ${total} routed · ${redos} ${redos === 1 ? "redo" : "redos"} · ` +
-      `${escalations} rule ${escalations === 1 ? "escalation" : "escalations"}`,
+    rule(config.audit ? "router · stats · audit mode" : "router · stats"),
+    config.audit
+      ? `  audited: ${total} ${total === 1 ? "prompt" : "prompts"} classified, nothing delegated`
+      : `  this week: ${total} routed · ${redos} ${redos === 1 ? "redo" : "redos"} · ` +
+        `${escalations} rule ${escalations === 1 ? "escalation" : "escalations"}`,
     ...TIERS.map((tier) => row(tier, counts[tier], total)),
-    `  down-routed ${down}% · redo rate ${redoRate}%`,
+    config.audit
+      ? "  would-route mix over the last 7 days"
+      : `  down-routed ${down}% · redo rate ${redoRate}%`,
     rule("what I've learned about you"),
     ...(learned.length ? learned : ["  (nothing yet - /router:redo trains me)"]),
     rule(),
