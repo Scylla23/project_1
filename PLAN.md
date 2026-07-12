@@ -223,7 +223,7 @@ All state human-readable. Nothing leaves the machine.
       Test: read top-to-bottom by a stranger persona: value clear in 10 seconds, install in 30.
       Demo value: HIGH — the landing page IS the launch.
 
-- [ ] T5.2 — DEMO.md
+- [x] T5.2 — DEMO.md
       What: exact 30-second script — prompts to type, in order: down-route one-liner → auto-escalation
       → redo → /router:stats. Timed against a real run.
       Files: DEMO.md
