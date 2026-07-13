@@ -334,7 +334,7 @@ scripts/, data/, or templates/ changes in this phase; zero new require()s.
       Test: both fetches recorded verbatim; badge 200 + camo rewrite live on the public page.
       Demo value: low
 
-- [ ] T7.4 — Launch runbook for the human-required legs (open items 1 and 2)
+- [x] T7.4 — Launch runbook for the human-required legs (open items 1 and 2)
       What: .route/launch-runbook.md — (a) true clean-machine install checklist with exact
       commands and verbatim expected output + self-contained .route/clean-machine-verify.sh
       (PASS/FAIL per check, zero repo dependencies); (b) interactive permission-prompt UX for
