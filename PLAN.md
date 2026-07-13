@@ -353,7 +353,7 @@ The plugin is untouched — this phase adds only src/ (index.html + design.md),
 lives on the dev machine and the CI runner, never in the repo. Deploys are
 CLI-only; Vercel Git integration stays off (no double deploys).
 
-- [ ] T8.1 — src/ scaffold (placeholder page + design spec)
+- [x] T8.1 — src/ scaffold (placeholder page + design spec)
       What: src/ with exactly index.html (self-contained placeholder, README
       copy, card.html palette) and design.md (constraints + pending guidelines).
       Files: src/index.html, src/design.md, PLAN.md
@@ -361,7 +361,7 @@ CLI-only; Vercel Git integration stays off (no double deploys).
       browser; zero external resource loads.
       Demo value: low (placeholder)
 
-- [ ] T8.2 — Vercel project + first CLI production deploy
+- [x] T8.2 — Vercel project + first CLI production deploy
       What: create/link project modelrouter-landing via vercel CLI, extract
       orgId/projectId, delete transient src/.vercel, gitignore .vercel,
       deploy src/ to production, verify live URL.
@@ -369,7 +369,7 @@ CLI-only; Vercel Git integration stays off (no double deploys).
       Test: curl -sI <prod-url> → HTTP 200; page body contains ModelRouter.
       Demo value: HIGH — the URL exists.
 
-- [ ] T8.3 — CI/CD: deploy-landing workflow + repo secrets
+- [x] T8.3 — CI/CD: deploy-landing workflow + repo secrets
       What: .github/workflows/deploy-landing.yml — on push to main filtered
       to src/**: guard (src/ is exactly index.html + design.md) then
       vercel deploy --prod via VERCEL_TOKEN/VERCEL_ORG_ID/VERCEL_PROJECT_ID
@@ -379,7 +379,7 @@ CLI-only; Vercel Git integration stays off (no double deploys).
       by gh secret list; no run triggered by the workflow's own commit.
       Demo value: none
 
-- [ ] T8.4 — Pipeline end-to-end verify
+- [x] T8.4 — Pipeline end-to-end verify
       What: probe commit touching src/design.md → push → run goes green →
       change live on prod URL; negative probe: non-src push triggers no run.
       Files: src/design.md (one probe line)
