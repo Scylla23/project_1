@@ -303,3 +303,44 @@ All state human-readable. Nothing leaves the machine.
       Files: data/pricing.json, scripts/stats.js
       Test: edit a price in JSON → next stats run reflects it, no code change.
       Demo value: HIGH — dollar numbers travel further than percentages.
+
+## Phase 7: Launch assets (added 2026-07-13)
+
+Build order: T7.3 → T7.1 → T7.2 → T7.4. Contracts: .route/phase-7.md.
+Recording tools (vhs/asciinema/agg) are dev-machine brew installs — nothing under
+scripts/, data/, or templates/ changes in this phase; zero new require()s.
+
+- [ ] T7.1 — Record the real 30-second demo GIF
+      What: docs/demo.gif recorded from a REAL interactive claude session running DEMO.md's
+      four beats verbatim (down-route one-liner → architect inline escalation → /router:redo
+      → /router:stats); recorder probed in order vhs → asciinema+agg → human runbook, never
+      faked from headless output; every take under the SAFETY trap with fresh seeded ~/.router.
+      Files: docs/demo.gif (+ gitignored .route/demo.tape, .route/record-demo.sh)
+      Test: four DEMO.md beats asserted from the recording's own evidence (typescript +
+      .router/log.jsonl); beat-2 flake → discard take, max 3; Fable eyeballs every frame.
+      Demo value: HIGH — this IS the launch asset.
+
+- [ ] T7.2 — README GIF embed
+      What: replace the 3-line launch placeholder with `![30-second demo](docs/demo.gif)`.
+      Files: README.md
+      Test: diff is exactly placeholder→embed (−3/+1, one hunk); no other README byte changes.
+      Demo value: HIGH
+
+- [x] T7.3 — Public badge verify (launch open item 4)
+      What: shields.io badge URL → 200 + image content-type; rendered public repo page shows
+      the camo.githubusercontent.com rewrite + correct link target; verbatim evidence recorded
+      in .route/phase-7.md; stale GitHub cache → one 10-minute retry, then honest report.
+      Files: PLAN.md only (evidence lives in the gitignored plan file)
+      Test: both fetches recorded verbatim; badge 200 + camo rewrite live on the public page.
+      Demo value: low
+
+- [ ] T7.4 — Launch runbook for the human-required legs (open items 1 and 2)
+      What: .route/launch-runbook.md — (a) true clean-machine install checklist with exact
+      commands and verbatim expected output + self-contained .route/clean-machine-verify.sh
+      (PASS/FAIL per check, zero repo dependencies); (b) interactive permission-prompt UX for
+      /router:audit off and /router:mode without allow rules. Reported "prepared — human
+      required", never done.
+      Files: none tracked (.route/ is gitignored; the human copies the two files out)
+      Test: runbooks walked through dry by Fable (bash -n + --print); every quoted output
+      string verified against scripts/init.js and scripts/config-set.js.
+      Demo value: none — but launch-day open items 1 and 2 die here.
