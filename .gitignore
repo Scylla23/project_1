@@ -1,3 +1,4 @@
 .router/
 node_modules/
 .route/
+.claude/
